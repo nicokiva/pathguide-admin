@@ -1,18 +1,10 @@
-import React from "react";
+import * as React from "react";
 import "./App.css";
-import { Header } from "./shared/Header";
-import { Content } from "./content/Content";
-import { Footer } from "./shared/Footer";
+import { Main } from "./content/Main";
 
 class App extends React.PureComponent {
   render() {
-    return (
-      <div className="App">
-        <Header />
-        <Content />
-        <Footer />
-      </div>
-    );
+    return <Main />;
   }
 }
 
