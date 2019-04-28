@@ -9,9 +9,12 @@
     "@types/node": "11.13.6",
     "@types/react": "16.8.14",
     "@types/react-dom": "16.8.4",
+    "autobind-decorator": "^2.4.0",
     "react": "^16.8.6",
     "react-device-detect": "^1.6.2",
     "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "typescript": "3.4.4"
   },
@@ -32,6 +35,8 @@
   ],
   "devDependencies": {
     "@types/material-ui": "^0.21.6",
+    "@types/react-router": "^4.4.5",
+    "@types/react-router-dom": "^4.3.2",
     "@types/styled-components": "^4.1.14",
     "styled-components": "^4.2.0"
   }

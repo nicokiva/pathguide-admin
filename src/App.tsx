@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./App.css";
-import { Main } from "./content/Main";
+import { Main } from "./content/shared/Main";
 
 class App extends React.PureComponent {
   render() {
