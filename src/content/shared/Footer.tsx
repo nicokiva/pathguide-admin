@@ -7,6 +7,7 @@ import styled from "styled-components";
 const AppBarStyled = styled<any>(AppBar)`
   && {
     bottom: 0;
+    height: 64px;
     left: 0;
     right: 0;
     top: auto;

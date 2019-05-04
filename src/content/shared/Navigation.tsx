@@ -20,6 +20,7 @@ type NavigationState = {
 
 const SeparatorStyled = styled.div`
   flex-grow: 1;
+  height: 64px;
 `;
 
 // TODO: find correct type
