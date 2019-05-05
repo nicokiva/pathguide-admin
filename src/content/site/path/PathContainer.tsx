@@ -8,13 +8,16 @@ type PathContainerProps = {};
 
 type PathContainerState = {
   path?: Array<PathModel>;
+  saved: boolean;
 };
 
 export class PathContainer extends React.PureComponent<
   PathContainerProps,
   PathContainerState
 > {
-  state: PathContainerState = {};
+  state: PathContainerState = {
+    saved: true
+  };
 
   async componentDidMount() {
     const path = await PathService.getPath();
@@ -26,7 +29,19 @@ export class PathContainer extends React.PureComponent<
     this.setState({ path });
   }
 
+  @autobind
+  handleSave() {
+    console.log(1);
+  }
+
   render() {
-    return <Path path={this.state.path} onChange={this.handleChange} />;
+    return (
+      <Path
+        saved={this.state.saved}
+        path={this.state.path}
+        onChange={this.handleChange}
+        onSave={this.handleSave}
+      />
+    );
   }
 }

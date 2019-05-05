@@ -8,3 +8,5 @@ export const getPath = async () => {
 
   return path.data;
 };
+
+export const savePath = async () => {};
