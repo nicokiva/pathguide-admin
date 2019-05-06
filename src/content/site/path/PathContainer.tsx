@@ -1,13 +1,11 @@
 import React from "react";
-import * as PathService from "../../../services/PathService";
 import { Path } from "./Path";
-import { Path as PathModel } from "../../../models/Path";
-import autobind from "autobind-decorator";
+import { PathContext } from "../../../context/PathContext";
 
 type PathContainerProps = {};
 
 type PathContainerState = {
-  path?: Array<PathModel>;
+  path?: string;
   saved: boolean;
 };
 
@@ -19,29 +17,17 @@ export class PathContainer extends React.PureComponent<
     saved: true
   };
 
-  async componentDidMount() {
-    const path = await PathService.getPath();
-    this.setState({ path });
-  }
-
-  @autobind
-  handleChange(path: Array<PathModel>) {
-    this.setState({ path });
-  }
-
-  @autobind
-  handleSave() {
-    console.log(1);
-  }
-
   render() {
     return (
-      <Path
-        saved={this.state.saved}
-        path={this.state.path}
-        onChange={this.handleChange}
-        onSave={this.handleSave}
-      />
+      <PathContext.Consumer>
+        {value => (
+          <Path
+            saved={this.state.saved}
+            path={value && value.path && JSON.stringify(value.path)}
+            onSave={path => value.onSave(JSON.parse(path))}
+          />
+        )}
+      </PathContext.Consumer>
     );
   }
 }
