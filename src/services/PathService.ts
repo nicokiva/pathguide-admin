@@ -6,15 +6,12 @@ class Service {
   private path: Array<Path> | undefined;
 
   async getPath() {
-    debugger;
     if (this.path) {
       return this.path;
     }
 
     const response = await HttpService.get<Array<Path>>(`path`);
-
     this.path = response.data;
-
     return this.path;
   }
 
