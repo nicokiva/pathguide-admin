@@ -4,11 +4,11 @@ import styled from "styled-components";
 
 const BarStyled = styled<any>(AppBar)``;
 
-type AppBarStyledProps = {
+type PGAppBarStyledProps = {
   children: React.ReactChild;
   className?: string;
 };
 
-export const AppBarStyled: React.FC<AppBarStyledProps> = (
-  props: AppBarStyledProps
+export const PGAppBarStyled: React.FC<PGAppBarStyledProps> = (
+  props: PGAppBarStyledProps
 ) => <BarStyled className={props.className}>{props.children}</BarStyled>;

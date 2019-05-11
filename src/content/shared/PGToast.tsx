@@ -8,7 +8,7 @@ export enum ToastType {
   WARNING = "WARNING"
 }
 
-type ToastProps = {
+type PGToastProps = {
   open: boolean;
   type: ToastType;
 };
@@ -16,7 +16,7 @@ type ToastProps = {
 const SnackbarStyled = styled<any>(Snackbar)``;
 // background-color: ${props.}`;
 
-export const Toast: React.FC<ToastProps> = (props: ToastProps) => (
+export const PGToast: React.FC<PGToastProps> = (props: PGToastProps) => (
   <SnackbarStyled open={props.open}>
     <SnackbarContent
       aria-describedby="client-snackbar"

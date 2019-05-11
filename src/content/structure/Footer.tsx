@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AppBarStyled as AppBar } from "../shared/AppBarStyled";
+import { PGAppBarStyled as AppBar } from "../shared/PGAppBarStyled";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";

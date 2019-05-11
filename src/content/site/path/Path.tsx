@@ -1,7 +1,9 @@
 import React from "react";
-import { TextField, Button } from "@material-ui/core";
-import { Toast, ToastType } from "../../shared/Toast";
+import { Button } from "@material-ui/core";
+// import { PGToastProps, ToastType } from "../../shared/PGToastProps";
 import autobind from "autobind-decorator";
+import { PGButtonBar as ButtonBar } from "../../shared/PGButtonBar";
+import { PGTextField } from "../../shared/PGTextField";
 
 type PathProps = {
   path?: string;
@@ -36,7 +38,7 @@ export class Path extends React.PureComponent<PathProps, PathState> {
   render() {
     return (
       <>
-        <TextField
+        <PGTextField
           fullWidth
           onChange={this.handleChange}
           label="Camino"
@@ -46,10 +48,11 @@ export class Path extends React.PureComponent<PathProps, PathState> {
           value={this.state.path}
         />
 
-        <Button variant="contained" color="primary" onClick={this.handleSave}>
-          Guardar
-        </Button>
-
+        <ButtonBar>
+          <Button variant="contained" color="primary" onClick={this.handleSave}>
+            Guardar
+          </Button>
+        </ButtonBar>
         {/* <Toast open={props.saved} type={ToastType.SUCCESS} /> */}
       </>
     );

@@ -1,11 +1,11 @@
 import * as React from "react";
-import { AppBarStyled as AppBar } from "../shared/AppBarStyled";
+import { PGAppBarStyled as AppBar } from "../shared/PGAppBarStyled";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Notifications } from "../shared/Notifications";
+import { PGNotifications as Notifications } from "../shared/PGNotifications";
 import { Menu } from "./Menu";
 import autobind from "autobind-decorator";
 import { Themed } from "../../styles/theme";
