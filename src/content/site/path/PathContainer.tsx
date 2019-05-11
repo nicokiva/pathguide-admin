@@ -1,6 +1,7 @@
 import React from "react";
 import { Path } from "./Path";
-import { PathContext } from "../../../context/PathContext";
+import { PathService } from "../../../services/PathService";
+import autobind from "autobind-decorator";
 
 type PathContainerProps = {};
 
@@ -17,17 +18,28 @@ export class PathContainer extends React.PureComponent<
     saved: true
   };
 
+  async componentDidMount() {
+    this.loadPath();
+  }
+
+  async loadPath() {
+    const path = await PathService.getPath();
+    this.setState({ path: JSON.stringify(path) });
+  }
+
+  @autobind
+  async handleSave(path: string) {
+    const response = await PathService.setPath(JSON.parse(path) || []);
+    console.log(response);
+  }
+
   render() {
     return (
-      <PathContext.Consumer>
-        {value => (
-          <Path
-            saved={this.state.saved}
-            path={value && value.path && JSON.stringify(value.path)}
-            onSave={path => value.onSave(JSON.parse(path))}
-          />
-        )}
-      </PathContext.Consumer>
+      <Path
+        saved={this.state.saved}
+        path={this.state.path}
+        onSave={this.handleSave}
+      />
     );
   }
 }

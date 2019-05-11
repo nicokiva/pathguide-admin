@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Navigation } from "./Navigation";
-import { ContentContainer } from "./ContentContainer";
+import { Content } from "./Content";
 import { Footer } from "./Footer";
 import { isMobile } from "react-device-detect";
 import { theme } from "../../styles/theme";
@@ -19,7 +19,7 @@ export class Main extends React.PureComponent<MainProps> {
         <ThemeProvider theme={theme.main}>
           <>
             <Navigation isMobile={isMobile} />
-            <ContentContainer />
+            <Content />
             <Footer />
           </>
         </ThemeProvider>
