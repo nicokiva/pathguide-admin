@@ -29,8 +29,7 @@ export class PathContainer extends React.PureComponent<
 
   @autobind
   async handleSave(path: string) {
-    const response = await PathService.setPath(JSON.parse(path) || []);
-    console.log(response);
+    PathService.setPath(JSON.parse(path) || []).then(() => this.loadPath());
   }
 
   render() {

@@ -1,17 +1,27 @@
 import { Path } from "../models/Path";
-import axios from "axios";
-
-const host = "http://satapc.com/pathguide";
+import { HttpService } from "./HttpService";
+import { threadId } from "worker_threads";
 
 class Service {
-  async getPath() {
-    const path = await axios.get<Array<Path>>(`${host}/path`);
+  private path: Array<Path> | undefined;
 
-    return path.data;
+  async getPath() {
+    debugger;
+    if (this.path) {
+      return this.path;
+    }
+
+    const response = await HttpService.get<Array<Path>>(`path`);
+
+    this.path = response.data;
+
+    return this.path;
   }
 
   async setPath(path: Array<Path>) {
-    axios.post<Array<Path>>(`${host}/setPath`, path, {
+    this.path = undefined;
+
+    return HttpService.post<Array<Path>>(`setPath`, path, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
