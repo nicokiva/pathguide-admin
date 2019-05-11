@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 const BarStyled = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 type PGButtonBarProps = {
-  children: React.ReactChild;
+  children: React.ReactChild[];
 };
 
 export const PGButtonBar: React.FC<PGButtonBarProps> = (

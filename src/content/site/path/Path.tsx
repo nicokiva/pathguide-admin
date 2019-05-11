@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import autobind from "autobind-decorator";
 import { PGButtonBar as ButtonBar } from "../../shared/PGButtonBar";
 import { PGTextField } from "../../shared/PGTextField";
+import { PGButton } from "../../shared/PGButton";
 
 type PathProps = {
   path?: string;
@@ -35,6 +36,9 @@ export class Path extends React.PureComponent<PathProps, PathState> {
     this.props.onSave(this.state.path || "");
   }
 
+  @autobind
+  handleCancel() {}
+
   render() {
     return (
       <>
@@ -49,9 +53,20 @@ export class Path extends React.PureComponent<PathProps, PathState> {
         />
 
         <ButtonBar>
-          <Button variant="contained" color="primary" onClick={this.handleSave}>
+          <PGButton
+            variant="contained"
+            color="secondary"
+            onClick={this.handleCancel}
+          >
+            Cancelar
+          </PGButton>
+          <PGButton
+            variant="contained"
+            color="primary"
+            onClick={this.handleSave}
+          >
             Guardar
-          </Button>
+          </PGButton>
         </ButtonBar>
         {/* <Toast open={props.saved} type={ToastType.SUCCESS} /> */}
       </>
