@@ -1,10 +1,7 @@
 import React from "react";
-import { Button } from "@material-ui/core";
-// import { PGToastProps, ToastType } from "../../shared/PGToastProps";
 import autobind from "autobind-decorator";
-import { PGButtonBar as ButtonBar } from "../../shared/PGButtonBar";
 import { PGTextField } from "../../shared/PGTextField";
-import { PGButton } from "../../shared/PGButton";
+import { PGConfirmationForm } from "../../shared/PGConfirmationForm";
 
 type PathProps = {
   path?: string;
@@ -41,7 +38,7 @@ export class Path extends React.PureComponent<PathProps, PathState> {
 
   render() {
     return (
-      <>
+      <PGConfirmationForm onSave={this.handleSave} onCancel={this.handleCancel}>
         <PGTextField
           fullWidth
           onChange={this.handleChange}
@@ -51,25 +48,7 @@ export class Path extends React.PureComponent<PathProps, PathState> {
           margin="normal"
           value={this.state.path}
         />
-
-        <ButtonBar>
-          <PGButton
-            variant="contained"
-            color="secondary"
-            onClick={this.handleCancel}
-          >
-            Cancelar
-          </PGButton>
-          <PGButton
-            variant="contained"
-            color="primary"
-            onClick={this.handleSave}
-          >
-            Guardar
-          </PGButton>
-        </ButtonBar>
-        {/* <Toast open={props.saved} type={ToastType.SUCCESS} /> */}
-      </>
+      </PGConfirmationForm>
     );
   }
 }

@@ -3,8 +3,12 @@ import axios from "axios";
 const host = "http://satapc.com/pathguide";
 
 export class Service {
-  async get<T>(url: string) {
-    return axios.get<T>(`${host}/${url}`);
+  async getLocal<T>(url: string, config = {}) {
+    return this.get<T>(`${host}/${url}`, config);
+  }
+
+  async get<T>(url: string, config = {}) {
+    return axios.get<T>(`${url}`, config);
   }
 
   async post<T>(url: string, body: object = {}, headers: object = {}) {

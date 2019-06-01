@@ -1,6 +1,5 @@
 import { Path } from "../models/Path";
 import { HttpService } from "./HttpService";
-import { threadId } from "worker_threads";
 
 class Service {
   private path: Array<Path> | undefined;
@@ -10,7 +9,7 @@ class Service {
       return this.path;
     }
 
-    const response = await HttpService.get<Array<Path>>(`path`);
+    const response = await HttpService.getLocal<Array<Path>>(`path`);
     this.path = response.data;
     return this.path;
   }

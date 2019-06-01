@@ -6,7 +6,7 @@ const ButtonWrapper = styled.div`
   min-width: 140px;
 `;
 
-type PGButtonProps = Exclude<ButtonProps, "fullWidth">;
+type PGButtonProps = Pick<ButtonProps, Exclude<keyof ButtonProps, 'fullWidth'>>;
 
 export const PGButton: React.FC<PGButtonProps> = (props: PGButtonProps) => (
   <ButtonWrapper>
