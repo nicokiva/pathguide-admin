@@ -9,7 +9,10 @@ class Service {
       return this.path;
     }
 
-    const response = await HttpService.getLocal<Array<Path>>(`path`);
+    // const response = await HttpService.get<Array<Path>>(`path`);
+    const response = await HttpService.getExternal<Array<Path>>(
+      "https://api.myjson.com/bins/kzevw"
+    );
     this.path = response.data;
     return this.path;
   }

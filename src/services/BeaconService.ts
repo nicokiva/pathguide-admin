@@ -20,7 +20,7 @@ class Service {
       return this.beacons;
     }
 
-    const response = await HttpService.get<GetDevicesResponse>(
+    const response = await HttpService.getExternal<GetDevicesResponse>(
       `${host}/devices`
     );
 
