@@ -1,6 +1,6 @@
 import React from "react";
 import { Beacon } from "../../../models/Beacon";
-import { withLoading } from "../../shared/PGLoadable";
+import { withLoading } from "../../shared/WithLoading";
 import styled from "styled-components";
 
 type BeaconsProps = {
