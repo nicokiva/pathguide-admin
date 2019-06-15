@@ -12,7 +12,7 @@ export const PGConfirmationForm: React.FC<PGConfirmationFormProps> = (
   props: PGConfirmationFormProps
 ) => (
   <>
-    {props.children}
+    <div>{props.children}</div>
     <ButtonBar>
       <PGButton variant="contained" color="secondary" onClick={props.onCancel}>
         Cancelar

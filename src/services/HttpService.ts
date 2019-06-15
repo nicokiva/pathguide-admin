@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://satapc.com/pathguide";
+const host = "http://localhost:3001";
 
 export class Service {
   async get<T>(url: string, config = {}) {

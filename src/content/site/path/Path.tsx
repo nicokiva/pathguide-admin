@@ -1,7 +1,7 @@
 import React from "react";
 import autobind from "autobind-decorator";
-import { PGTextField } from "../../shared/PGTextField";
-import { PGConfirmationForm } from "../../shared/PGConfirmationForm";
+import { PGTextField as TextField } from "../../shared/PGTextField";
+import { PGConfirmationForm as ConfirmationForm } from "../../shared/PGConfirmationForm";
 
 type PathProps = {
   path?: string;
@@ -38,8 +38,8 @@ export class Path extends React.PureComponent<PathProps, PathState> {
 
   render() {
     return (
-      <PGConfirmationForm onSave={this.handleSave} onCancel={this.handleCancel}>
-        <PGTextField
+      <ConfirmationForm onSave={this.handleSave} onCancel={this.handleCancel}>
+        <TextField
           fullWidth
           onChange={this.handleChange}
           label="Camino"
@@ -48,7 +48,7 @@ export class Path extends React.PureComponent<PathProps, PathState> {
           margin="normal"
           value={this.state.path}
         />
-      </PGConfirmationForm>
+      </ConfirmationForm>
     );
   }
 }

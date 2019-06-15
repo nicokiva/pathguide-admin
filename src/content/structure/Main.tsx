@@ -8,7 +8,7 @@ import { ThemeProvider } from "styled-components";
 import { createBrowserHistory } from "history";
 import { Router } from "react-router";
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 type MainProps = {};
 
