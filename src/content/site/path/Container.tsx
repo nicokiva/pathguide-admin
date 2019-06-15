@@ -1,5 +1,5 @@
 import React from "react";
-import { Path } from "./Path";
+import { Component } from "./Component";
 import { PathService } from "../../../services/PathService";
 import autobind from "autobind-decorator";
 
@@ -29,12 +29,12 @@ export class Container extends React.PureComponent<
 
   @autobind
   async handleSave(path: string) {
-    PathService.setPath(JSON.parse(path) || []).then(() => this.loadPath());
+    PathService.setPath(JSON.parse(path) || []);
   }
 
   render() {
     return (
-      <Path
+      <Component
         saved={this.state.saved}
         path={this.state.path}
         onSave={this.handleSave}

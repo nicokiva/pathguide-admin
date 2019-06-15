@@ -8,22 +8,20 @@ import { PGConfirmationForm as ConfirmationForm } from "../../shared/PGConfirmat
 import autobind from "autobind-decorator";
 import { withLoading } from "../../shared/WithLoading";
 import { history } from "../../structure/Main";
+import { ROUTES } from "../../metadata/Routes";
 
-type BeaconDetailProps = {
+type Props = {
   beacon?: Beacon;
   nodes: Array<Node>;
   onSave: (beacon: Beacon) => void;
 };
 
-type BeaconDetailState = {
+type State = {
   node?: Node;
 };
 
-class Component extends React.PureComponent<
-  BeaconDetailProps,
-  BeaconDetailState
-> {
-  state: BeaconDetailState = {
+class Component extends React.PureComponent<Props, State> {
+  state: State = {
     node: this.props.beacon ? this.props.beacon.node : undefined
   };
 
@@ -36,12 +34,14 @@ class Component extends React.PureComponent<
   }
 
   @autobind
-  handleSave() {
+  async handleSave() {
     if (!this.props.beacon || !this.state.node) {
       return;
     }
 
-    this.props.onSave({ ...this.props.beacon!, node: this.state.node });
+    await this.props.onSave({ ...this.props.beacon!, node: this.state.node });
+
+    history.push(ROUTES.BEACONS);
   }
 
   @autobind

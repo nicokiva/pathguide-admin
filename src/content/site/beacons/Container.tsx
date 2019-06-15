@@ -1,7 +1,7 @@
 import React from "react";
 import { Beacon } from "../../../models/Beacon";
 import { DevicesService } from "../../../services/DevicesService";
-import { Beacons } from "./Beacons";
+import { Beacons } from "./Component";
 import { Path } from "../../../models/Path";
 
 type ContainerProps = {};
@@ -24,7 +24,6 @@ export class Container extends React.PureComponent<
 
   async componentDidMount() {
     const devicesResponse = await DevicesService.getDevices();
-
     this.setState({ beacons: devicesResponse.data, isLoading: false });
   }
 

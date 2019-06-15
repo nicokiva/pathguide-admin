@@ -2,8 +2,6 @@ import { HttpService } from "./HttpService";
 import { Beacon } from "../models/Beacon";
 import { PathService } from "./PathService";
 
-const host = "http://localhost:3001";
-
 type GetDevicesResponse = {
   meta: {
     page: number;
@@ -16,10 +14,6 @@ class Service {
   private devicesResponse: GetDevicesResponse | undefined;
 
   async getDevices() {
-    if (this.devicesResponse) {
-      return this.devicesResponse;
-    }
-
     const response = await HttpService.get<GetDevicesResponse>(`devices`);
 
     let { data, meta } = response.data;

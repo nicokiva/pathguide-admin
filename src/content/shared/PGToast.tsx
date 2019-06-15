@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { SnackbarContent, Snackbar } from "@material-ui/core";
 import styled from "styled-components";
 
@@ -15,6 +16,23 @@ type PGToastProps = {
 
 const SnackbarStyled = styled<any>(Snackbar)``;
 // background-color: ${props.}`;
+
+export const createToast = (props: PGToastProps) => {
+  const toastContainerElement: HTMLDivElement = document.createElement("div");
+  const propsWithClose: PGToastProps = {
+    ...props
+  };
+
+  let rootElement = document.getElementById("toast-root");
+  if (!rootElement) {
+    rootElement = document.createElement("div");
+    rootElement.id = "toast-root";
+    document.body.appendChild(rootElement);
+  }
+  rootElement.appendChild(toastContainerElement);
+
+  ReactDOM.render(<PGToast {...propsWithClose} />, toastContainerElement);
+};
 
 export const PGToast: React.FC<PGToastProps> = (props: PGToastProps) => (
   <SnackbarStyled open={props.open}>

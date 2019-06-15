@@ -8,7 +8,7 @@ import autobind from "autobind-decorator";
 import { history } from "../../structure/Main";
 import { ROUTES } from "../../metadata/Routes";
 
-type BeaconsProps = {
+type Props = {
   beacons: Array<Beacon>;
 };
 
@@ -17,7 +17,7 @@ const BeaconsWrapper = styled.div`
   flex-direction: column;
 `;
 
-class Component extends React.PureComponent<BeaconsProps> {
+class Component extends React.PureComponent<Props> {
   @autobind
   handleClick(item: Beacon) {
     history.push(ROUTES.BEACON.replace(":id", item.identifier));

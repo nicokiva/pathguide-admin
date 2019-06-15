@@ -2,19 +2,21 @@ import React from "react";
 import autobind from "autobind-decorator";
 import { PGTextField as TextField } from "../../shared/PGTextField";
 import { PGConfirmationForm as ConfirmationForm } from "../../shared/PGConfirmationForm";
+import { history } from "../../structure/Main";
+import { ROUTES } from "../../metadata/Routes";
 
-type PathProps = {
+type Props = {
   path?: string;
   onSave: (path: string) => void;
   saved: boolean;
 };
 
-type PathState = {
+type State = {
   path?: string;
 };
 
-export class Path extends React.PureComponent<PathProps, PathState> {
-  state: PathState = {};
+export class Component extends React.PureComponent<Props, State> {
+  state: State = {};
 
   @autobind
   handleChange(e: { target: { value: string } }) {
@@ -22,19 +24,23 @@ export class Path extends React.PureComponent<PathProps, PathState> {
     this.setState({ path });
   }
 
-  componentDidUpdate(prevProps: PathProps, prevState: PathState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.props.path !== prevProps.path) {
       this.setState({ path: this.props.path });
     }
   }
 
   @autobind
-  handleSave() {
-    this.props.onSave(this.state.path || "");
+  async handleSave() {
+    await this.props.onSave(this.state.path || "");
+
+    history.push(ROUTES.BEACONS);
   }
 
   @autobind
-  handleCancel() {}
+  handleCancel() {
+    history.goBack();
+  }
 
   render() {
     return (
