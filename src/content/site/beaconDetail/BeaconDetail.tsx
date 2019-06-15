@@ -7,6 +7,7 @@ import { PGSelect as Select } from "../../shared/PGSelect";
 import { PGConfirmationForm as ConfirmationForm } from "../../shared/PGConfirmationForm";
 import autobind from "autobind-decorator";
 import { withLoading } from "../../shared/WithLoading";
+import { history } from "../../structure/Main";
 
 type BeaconDetailProps = {
   beacon?: Beacon;
@@ -44,7 +45,9 @@ class Component extends React.PureComponent<
   }
 
   @autobind
-  handleCancel() {}
+  handleCancel() {
+    history.goBack();
+  }
 
   render() {
     return this.props.beacon !== undefined ? (
