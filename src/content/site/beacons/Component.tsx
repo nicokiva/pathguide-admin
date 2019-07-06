@@ -39,7 +39,9 @@ class Component extends React.PureComponent<Props> {
             >
               <Bullet question="Identificador" answer={b.identifier} />
 
-              <Bullet question="Asignado a" answer={b.node.description} />
+              {b.node && (
+                <Bullet question="Asignado a" answer={b.node.description} />
+              )}
             </Article>
           ))}
         </BeaconsWrapper>

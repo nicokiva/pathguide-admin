@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://localhost:3001";
+const host = "http://23.92.211.122:3001";
 
 export class Service {
   async get<T>(url: string, config = {}) {

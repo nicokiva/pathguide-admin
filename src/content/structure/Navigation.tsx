@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { PGNotifications as Notifications } from "../shared/PGNotifications";
+import { Container as Notifications } from "../site/notifications/Container";
 import { Menu } from "./Menu";
 import autobind from "autobind-decorator";
 import { Themed } from "../../styles/theme";
@@ -65,9 +65,7 @@ export class Navigation extends React.PureComponent<
 
             <SeparatorStyled />
 
-            {!this.props.isMobile && (
-              <Notifications notificationsQuantity={0} />
-            )}
+            {!this.props.isMobile && <Notifications />}
           </Toolbar>
         </AppBarStyled>
 

@@ -43,6 +43,11 @@ class MenuInner extends React.PureComponent<MenuProps> {
               label="Camino"
               imageUrl="https://cdn2.iconfinder.com/data/icons/navigation-and-mapping-1/65/path-512.png"
             />
+            <ListItem
+              onClick={() => this.handleClick(ROUTES.NODES)}
+              label="Estaciones"
+              imageUrl="https://cdn2.iconfinder.com/data/icons/navigation-and-mapping-1/65/path-512.png"
+            />
           </List>
         </ListWrapper>
       </Drawer>

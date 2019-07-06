@@ -1,7 +1,7 @@
 export type Node = {
   id: string;
   tag: string;
-  flor: number;
+  floor: number;
   description: string;
   extra: string;
   types: Array<string>;

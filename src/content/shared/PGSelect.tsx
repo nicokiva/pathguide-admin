@@ -9,6 +9,7 @@ type PGOption = {
 };
 
 type PGSelectProps = {
+  multiline?: boolean;
   selectedOptionValue?: string;
   options: Array<PGOption>;
   onChange?: (
@@ -17,25 +18,18 @@ type PGSelectProps = {
   ) => void;
 };
 
-export class PGSelect extends React.PureComponent<PGSelectProps> {
-  render() {
-    return (
-      <FormControl>
-        <Select
-          value={this.props.selectedOptionValue}
-          onChange={this.props.onChange}
-          inputProps={{
-            name: "age",
-            id: "age-simple"
-          }}
-        >
-          {this.props.options.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    );
-  }
-}
+export const PGSelect: React.FC<PGSelectProps> = props => (
+  <FormControl>
+    <Select
+      multiline={props.multiline}
+      value={props.selectedOptionValue}
+      onChange={props.onChange}
+    >
+      {props.options.map(option => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+);

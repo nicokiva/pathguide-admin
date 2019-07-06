@@ -5,7 +5,7 @@ import { PGButton } from "./PGButton";
 type PGConfirmationFormProps = {
   onCancel: () => void;
   onSave: () => void;
-  children: React.ReactChild;
+  children: React.ReactNode;
 };
 
 export const PGConfirmationForm: React.FC<PGConfirmationFormProps> = (

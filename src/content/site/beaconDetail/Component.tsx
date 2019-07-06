@@ -67,14 +67,18 @@ class Component extends React.PureComponent<Props, State> {
           <Bullet
             question="Asignado a"
             answer={
-              <Select
-                onChange={this.handleChange}
-                selectedOptionValue={this.state.node!.tag}
-                options={this.props.nodes.map(node => ({
-                  value: node.tag,
-                  label: node.description
-                }))}
-              />
+              this.props.nodes.length > 0 ? (
+                <Select
+                  onChange={this.handleChange}
+                  selectedOptionValue={this.state.node && this.state.node.tag}
+                  options={this.props.nodes.map(node => ({
+                    value: node.tag,
+                    label: node.description
+                  }))}
+                />
+              ) : (
+                "No hay estaciones disponibles"
+              )
             }
           />
         </Article>

@@ -6,12 +6,18 @@ class Service {
   private path: Path | undefined;
 
   async getPath() {
-    if (this.path) {
+    if (this.path !== undefined) {
       return this.path;
     }
 
     const response = await HttpService.get<Path>(`path`);
-    this.path = response.data;
+    const { data } = response;
+
+    this.path = {
+      nodes: data.nodes || [],
+      edges: data.edges || []
+    };
+
     return this.path;
   }
 
@@ -42,10 +48,14 @@ class Service {
 
   async getNodes() {
     if (!this.path) {
-      this.getPath();
+      await this.getPath();
     }
 
     return this.path!.nodes;
+  }
+
+  async getNodeById(id: string) {
+    return (await this.getNodes()).find(node => node.id === id);
   }
 }
 
