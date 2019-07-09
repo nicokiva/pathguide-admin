@@ -31,6 +31,26 @@ class Service {
     return this.setPath(path);
   }
 
+  async updateNode(node: Node) {
+    const nodes = (await this.getNodes()).filter(
+      currentNode => currentNode.id !== node.id
+    );
+
+    const path = { ...this.path, nodes: [...nodes, node] };
+
+    return this.setPath(path);
+  }
+
+  async deleteNode(node: Node) {
+    const nodes = (await this.getNodes()).filter(
+      currentNode => currentNode.id !== node.id
+    );
+
+    const path = { ...this.path, nodes };
+
+    return this.setPath(path);
+  }
+
   async clearNodes() {
     const path = { ...this.path, nodes: [] };
 

@@ -30,8 +30,15 @@ export class Container extends React.PureComponent<
     this.loadNodes();
   }
 
+  @autobind
+  async handleDelete(node: Node) {
+    await PathService.deleteNode(node);
+    this.loadNodes();
+  }
+
   async loadNodes() {
     const nodes = await PathService.getNodes();
+    console.log(nodes);
     this.setState({ nodes, isLoading: false });
   }
 
@@ -39,6 +46,7 @@ export class Container extends React.PureComponent<
     return (
       <Nodes
         nodes={this.state.nodes}
+        onDelete={this.handleDelete}
         onClearAll={this.handleClearAll}
         isLoading={this.state.isLoading}
       />

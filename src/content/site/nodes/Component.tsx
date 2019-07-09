@@ -7,14 +7,15 @@ import autobind from "autobind-decorator";
 import { history } from "../../structure/Main";
 import { ROUTES, getRoute } from "../../metadata/Routes";
 import { Node } from "../../../models/Node";
-import { PGButtonAdd } from "../../shared/PGButtonAdd";
+import { PGButtonAdd } from "../../shared/icons/PGButtonAdd";
 import { PGButtonBar } from "../../shared/PGButtonBar";
 import { Action } from "../../metadata/Actions";
-import { PGButtonClearAll } from "../../shared/PGButtonClearAll";
+import { PGButtonClearAll } from "../../shared/icons/PGButtonClearAll";
 
 type Props = {
   nodes: Array<Node>;
   onClearAll: () => void;
+  onDelete: (item: Node) => void;
 };
 
 const NodesWrapper = styled.div`
@@ -33,32 +34,33 @@ class Component extends React.PureComponent<Props> {
   }
 
   @autobind
-  handleClearAll() {
-    this.props.onClearAll();
+  handleEdit(node: Node) {
+    history.push(
+      getRoute(ROUTES.NODE_ADD_EDIT)
+        .replace(":action", Action.EDIT)
+        .replace(":id", node.id)
+    );
   }
-
-  @autobind
-  handleEdit() {}
 
   render() {
     return (
       <>
         <PGButtonBar>
           <PGButtonAdd onClick={this.handleAdd} />
-          <PGButtonClearAll onClick={this.handleClearAll} />
+          <PGButtonClearAll onClick={this.props.onClearAll} />
         </PGButtonBar>
 
         {this.props.nodes.length > 0 ? (
           <NodesWrapper>
             {this.props.nodes.map(n => (
               <Article
-                key={n.id}
                 item={n}
+                onDelete={this.props.onDelete as any}
+                onClick={this.handleEdit as any}
+                key={n.id}
                 selectable
                 id={n.id}
-                imageUrl=""
                 title={n.description}
-                onClick={this.handleEdit}
               >
                 <Bullet question="Extra" answer={n.extra} />
               </Article>

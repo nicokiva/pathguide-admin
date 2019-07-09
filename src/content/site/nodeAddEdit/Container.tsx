@@ -7,7 +7,6 @@ import { Action } from "../../metadata/Actions";
 import autobind from "autobind-decorator";
 import { history } from "../../structure/Main";
 import { ROUTES, getRoute } from "../../metadata/Routes";
-import { NodeTypes, NodeType } from "../../metadata/NodeTypes";
 
 type ContainerProps = {} & RouteComponentProps<{ id: string; action: Action }>;
 
@@ -48,14 +47,30 @@ export class Container extends React.PureComponent<
     }));
   }
 
-  @autobind
-  async handleSave() {
+  async append() {
     const node = {
       ...this.state.selectedNode,
       id: Math.random().toString()
     } as Node;
 
     await PathService.appendNode(node);
+  }
+
+  async update(node: Node) {
+    await PathService.updateNode(node);
+  }
+
+  @autobind
+  async handleSave() {
+    if (this.state.selectedNode === undefined) {
+      return;
+    }
+
+    if (this.state.action === Action.ADD) {
+      await this.append();
+    } else {
+      await this.update(this.state.selectedNode as Node);
+    }
 
     history.push(getRoute(ROUTES.NODES));
   }

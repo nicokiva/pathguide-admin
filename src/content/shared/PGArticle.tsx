@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { PGButtonDelete } from "./icons/PGButtonDelete";
 
 type PGArticleProps = {
   item: unknown;
   id: string;
-  imageUrl: string;
+  imageUrl?: string;
   title: React.ReactNode;
   children: React.ReactNode;
   selectable?: boolean;
   onClick?: (item: unknown) => void;
+  onDelete?: (item: unknown) => void;
 };
 
 type PGArticleWrapperProps = Pick<PGArticleProps, "selectable">;
@@ -31,6 +33,10 @@ const PGArticleWrapper = styled.div<PGArticleWrapperProps>`
     background-size: 100% 1px;
   }
 
+  & > div {
+    width: 100%;
+  }
+
   ${(props: PGArticleWrapperProps) =>
     props.selectable
       ? `&:hover {
@@ -45,7 +51,7 @@ const Image = styled.img`
   margin-right: 20px;
 `;
 
-const Title = styled.div`
+const Title = styled.span`
   font-size: 18px;
   font-weight: bolder;
   margin-bottom: 10px;
@@ -56,14 +62,32 @@ const Content = styled.span`
   font-size: 13px;
 `;
 
+const TitleBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const ButtonSection = styled.div``;
+
 export const PGArticle: React.FC<PGArticleProps> = (props: PGArticleProps) => (
   <PGArticleWrapper
     selectable={props.selectable}
     onClick={() => (props.onClick ? props.onClick(props.item) : undefined)}
   >
-    <Image src={props.imageUrl} alt={String(props.title)} />
+    {props.imageUrl && <Image src={props.imageUrl} alt={String(props.title)} />}
+
     <div>
-      <Title>{props.title}</Title>
+      <TitleBar>
+        <Title>{props.title}</Title>
+        <ButtonSection>
+          <PGButtonDelete
+            onClick={() =>
+              props.onDelete ? props.onDelete(props.item) : undefined
+            }
+          />
+        </ButtonSection>
+      </TitleBar>
       <Content>{props.children}</Content>
     </div>
   </PGArticleWrapper>
