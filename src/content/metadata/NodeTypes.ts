@@ -1,13 +1,13 @@
 export enum NodeType {
-  FINAL = "Final",
+  GATEWAY = "Gateway",
   BATHROOM = "Bathroom",
-  BEACON = "Beacon"
+  CLASSROOM = "Classroom"
 }
 
 type NodeTypes = { [s in NodeType]: string };
 
 export const NodeTypes = {
-  [NodeType.FINAL]: NodeType.FINAL.toLowerCase(),
+  [NodeType.GATEWAY]: NodeType.GATEWAY.toLowerCase(),
   [NodeType.BATHROOM]: NodeType.BATHROOM.toLowerCase(),
-  [NodeType.BEACON]: NodeType.BEACON.toLowerCase()
+  [NodeType.CLASSROOM]: NodeType.CLASSROOM.toLowerCase()
 };

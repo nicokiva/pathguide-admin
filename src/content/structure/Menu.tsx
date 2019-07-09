@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Drawer, IconButton, List } from "@material-ui/core";
-
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { ROUTES } from "../metadata/Routes";
+import { ROUTES, getRoute } from "../metadata/Routes";
 import autobind from "autobind-decorator";
 import styled from "styled-components";
 import { PGListItem as ListItem } from "../shared/PGListItem";
@@ -34,17 +33,17 @@ class MenuInner extends React.PureComponent<MenuProps> {
         <ListWrapper>
           <List>
             <ListItem
-              onClick={() => this.handleClick(ROUTES.BEACONS)}
+              onClick={() => this.handleClick(getRoute(ROUTES.BEACONS))}
               label="Beacons"
               imageUrl="https://cloud.estimote.com/images/beacons/coconut_large.png"
             />
             <ListItem
-              onClick={() => this.handleClick(ROUTES.PATH)}
+              onClick={() => this.handleClick(getRoute(ROUTES.PATH))}
               label="Camino"
               imageUrl="https://cdn2.iconfinder.com/data/icons/navigation-and-mapping-1/65/path-512.png"
             />
             <ListItem
-              onClick={() => this.handleClick(ROUTES.NODES)}
+              onClick={() => this.handleClick(getRoute(ROUTES.NODES))}
               label="Estaciones"
               imageUrl="https://cdn2.iconfinder.com/data/icons/navigation-and-mapping-1/65/path-512.png"
             />

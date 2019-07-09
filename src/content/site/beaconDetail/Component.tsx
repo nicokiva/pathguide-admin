@@ -8,7 +8,7 @@ import { PGConfirmationForm as ConfirmationForm } from "../../shared/PGConfirmat
 import autobind from "autobind-decorator";
 import { withLoading } from "../../shared/WithLoading";
 import { history } from "../../structure/Main";
-import { ROUTES } from "../../metadata/Routes";
+import { ROUTES, getRoute } from "../../metadata/Routes";
 
 type Props = {
   beacon?: Beacon;
@@ -41,7 +41,7 @@ class Component extends React.PureComponent<Props, State> {
 
     await this.props.onSave({ ...this.props.beacon!, node: this.state.node });
 
-    history.push(ROUTES.BEACONS);
+    history.push(getRoute(ROUTES.BEACONS));
   }
 
   @autobind
@@ -70,7 +70,7 @@ class Component extends React.PureComponent<Props, State> {
               this.props.nodes.length > 0 ? (
                 <Select
                   onChange={this.handleChange}
-                  selectedOptionValue={this.state.node && this.state.node.tag}
+                  value={this.state.node && this.state.node.tag}
                   options={this.props.nodes.map(node => ({
                     value: node.tag,
                     label: node.description

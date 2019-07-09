@@ -3,27 +3,19 @@ import { HttpService } from "./HttpService";
 import { Node } from "../models/Node";
 
 class Service {
-  private path: Path | undefined;
+  private path: Path = {
+    nodes: [],
+    edges: []
+  };
 
   async getPath() {
-    if (this.path !== undefined) {
-      return this.path;
-    }
-
     const response = await HttpService.get<Path>(`path`);
-    const { data } = response;
 
-    this.path = {
-      nodes: data.nodes || [],
-      edges: data.edges || []
-    };
-
+    this.path = response.data;
     return this.path;
   }
 
   async setPath(path: Path) {
-    this.path = undefined;
-
     await HttpService.post<Path>(`path`, path, {
       headers: {
         "Content-Type": "application/json"
@@ -31,6 +23,18 @@ class Service {
     });
 
     return this.getPath();
+  }
+
+  async appendNode(node: Node) {
+    const path = { ...this.path, nodes: [...this.path.nodes, node] };
+
+    return this.setPath(path);
+  }
+
+  async clearNodes() {
+    const path = { ...this.path, nodes: [] };
+
+    return this.setPath(path);
   }
 
   async swapNodes(oldNode: Node, node: Node) {
@@ -47,9 +51,7 @@ class Service {
   }
 
   async getNodes() {
-    if (!this.path) {
-      await this.getPath();
-    }
+    await this.getPath();
 
     return this.path!.nodes;
   }

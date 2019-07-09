@@ -6,13 +6,14 @@ import { RouteComponentProps } from "react-router";
 import { Action } from "../../metadata/Actions";
 import autobind from "autobind-decorator";
 import { history } from "../../structure/Main";
-import { ROUTES } from "../../metadata/Routes";
+import { ROUTES, getRoute } from "../../metadata/Routes";
+import { NodeTypes, NodeType } from "../../metadata/NodeTypes";
 
 type ContainerProps = {} & RouteComponentProps<{ id: string; action: Action }>;
 
 type ContainerState = {
   nodes: Array<Node>;
-  selectedNode: Partial<Node>;
+  selectedNode?: Partial<Node>;
   isLoading: boolean;
   action: Action;
 };
@@ -25,15 +26,14 @@ export class Container extends React.PureComponent<
     nodes: [],
     isLoading: true,
     action: Action.ADD,
-    selectedNode: {}
+    selectedNode: undefined
   };
 
   async componentDidMount() {
     const { action, id } = this.props.match.params;
-
-    let { selectedNode } = this.state;
+    let selectedNode: Node | undefined;
     if (action === Action.EDIT && id !== undefined) {
-      selectedNode = (await PathService.getNodeById(id)) || {};
+      selectedNode = await PathService.getNodeById(id);
     }
 
     this.setState({ action, selectedNode });
@@ -50,10 +50,14 @@ export class Container extends React.PureComponent<
 
   @autobind
   async handleSave() {
-    console.log(this.state);
-    // await this.props.onSave(this.state.path || "");
+    const node = {
+      ...this.state.selectedNode,
+      id: Math.random().toString()
+    } as Node;
 
-    // history.push(ROUTES.NODES);
+    await PathService.appendNode(node);
+
+    history.push(getRoute(ROUTES.NODES));
   }
 
   @autobind
@@ -63,16 +67,13 @@ export class Container extends React.PureComponent<
 
   render() {
     return (
-      (this.state.selectedNode && (
-        <Component
-          action={this.state.action}
-          node={this.state.selectedNode}
-          onChange={this.handleChange}
-          onCancel={this.handleCancel}
-          onSave={this.handleSave}
-        />
-      )) ||
-      null
+      <Component
+        action={this.state.action}
+        node={this.state.selectedNode}
+        onChange={this.handleChange}
+        onCancel={this.handleCancel}
+        onSave={this.handleSave}
+      />
     );
   }
 }

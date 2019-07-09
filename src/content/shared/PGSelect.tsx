@@ -1,7 +1,8 @@
 import React from "react";
-import Select from "@material-ui/core/Select";
+import Select, { SelectProps } from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Input } from "@material-ui/core";
 
 type PGOption = {
   value: string;
@@ -9,27 +10,21 @@ type PGOption = {
 };
 
 type PGSelectProps = {
-  multiline?: boolean;
-  selectedOptionValue?: string;
   options: Array<PGOption>;
-  onChange?: (
-    event: React.ChangeEvent<HTMLSelectElement>,
-    child: React.ReactNode
-  ) => void;
-};
+} & SelectProps;
 
-export const PGSelect: React.FC<PGSelectProps> = props => (
-  <FormControl>
-    <Select
-      multiline={props.multiline}
-      value={props.selectedOptionValue}
-      onChange={props.onChange}
-    >
-      {props.options.map(option => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </Select>
-  </FormControl>
-);
+export const PGSelect: React.FC<PGSelectProps> = props => {
+  const { options, ...otherProps } = props;
+
+  return (
+    <FormControl>
+      <Select {...otherProps}>
+        {props.options.map(option => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+};

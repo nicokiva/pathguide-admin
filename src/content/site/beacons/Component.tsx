@@ -6,7 +6,7 @@ import { PGArticle as Article } from "../../shared/PGArticle";
 import { PGBullet as Bullet } from "../../shared/PGBullet";
 import autobind from "autobind-decorator";
 import { history } from "../../structure/Main";
-import { ROUTES } from "../../metadata/Routes";
+import { ROUTES, getRoute } from "../../metadata/Routes";
 
 type Props = {
   beacons: Array<Beacon>;
@@ -20,7 +20,7 @@ const BeaconsWrapper = styled.div`
 class Component extends React.PureComponent<Props> {
   @autobind
   handleClick(item: Beacon) {
-    history.push(ROUTES.BEACON.replace(":id", item.identifier));
+    history.push(getRoute(ROUTES.BEACON).replace(":id", item.identifier));
   }
 
   render() {

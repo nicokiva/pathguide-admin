@@ -3,7 +3,7 @@ import autobind from "autobind-decorator";
 import { PGTextField as TextField } from "../../shared/PGTextField";
 import { PGConfirmationForm as ConfirmationForm } from "../../shared/PGConfirmationForm";
 import { history } from "../../structure/Main";
-import { ROUTES } from "../../metadata/Routes";
+import { ROUTES, getRoute } from "../../metadata/Routes";
 
 type Props = {
   path?: string;
@@ -34,7 +34,7 @@ export class Component extends React.PureComponent<Props, State> {
   async handleSave() {
     await this.props.onSave(this.state.path || "");
 
-    history.push(ROUTES.BEACONS);
+    history.push(getRoute(ROUTES.BEACONS));
   }
 
   @autobind
