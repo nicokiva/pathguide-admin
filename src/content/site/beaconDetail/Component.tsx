@@ -70,7 +70,7 @@ class Component extends React.PureComponent<Props, State> {
               this.props.nodes.length > 0 ? (
                 <Select
                   onChange={this.handleChange}
-                  value={this.state.node && this.state.node.tag}
+                  value={(this.state.node && this.state.node.tag) || ""}
                   options={this.props.nodes.map(node => ({
                     value: node.tag,
                     label: node.description

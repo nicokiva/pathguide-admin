@@ -7,6 +7,8 @@ import { Container as BeaconsContainer } from "../site/beacons/Container";
 import { Container as BeaconsDetailContainer } from "../site/beaconDetail/Container";
 import { Container as NodesContainer } from "../site/nodes/Container";
 import { Container as NodeAddEditContainer } from "../site/nodeAddEdit/Container";
+import { Container as EdgesContainer } from "../site/edges/Container";
+import { Container as EdgeAddContainer } from "../site/edgeAdd/Container";
 
 const ContentWrapper = styled.div`
   overflow: auto;
@@ -34,6 +36,12 @@ export const Content: React.FC = () => {
           exact
           path={getRoute(ROUTES.NODE_ADD_EDIT)}
           component={NodeAddEditContainer}
+        />
+        <Route exact path={getRoute(ROUTES.EDGES)} component={EdgesContainer} />
+        <Route
+          exact
+          path={getRoute(ROUTES.EDGE_ADD)}
+          component={EdgeAddContainer}
         />
       </Switch>
     </ContentWrapper>

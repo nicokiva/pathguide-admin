@@ -1,9 +1,9 @@
 import React from "react";
+import { Node } from "../../../models/Node";
+import { Action } from "../../metadata/Actions";
 import { PGTextField as TextField } from "../../shared/PGTextField";
 import { PGConfirmationForm as ConfirmationForm } from "../../shared/PGConfirmationForm";
 import { PGSelect as Select } from "../../shared/PGSelect";
-import { Node } from "../../../models/Node";
-import { Action } from "../../metadata/Actions";
 import { NodeTypes } from "../../metadata/NodeTypes";
 
 type Props = {
@@ -59,7 +59,6 @@ export const Component: React.FC<Props> = props => (
       fullWidth
       label="Extra"
       multiline
-      rows={4}
       margin="normal"
       name="extra"
       value={props.node && props.node.extra}

@@ -1,3 +1,5 @@
+import { Node } from "./Node";
+
 export type Edge = {
   distance: number;
   from: string;

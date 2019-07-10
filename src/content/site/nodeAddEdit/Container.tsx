@@ -50,7 +50,7 @@ export class Container extends React.PureComponent<
   async append() {
     const node = {
       ...this.state.selectedNode,
-      id: Math.random().toString()
+      id: Math.floor(Math.random() * 10001).toString()
     } as Node;
 
     await PathService.appendNode(node);

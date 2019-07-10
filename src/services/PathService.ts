@@ -1,7 +1,9 @@
 import { Path } from "../models/Path";
 import { HttpService } from "./HttpService";
 import { Node } from "../models/Node";
+import { Edge } from "../models/Edge";
 
+// https://api.myjson.com/bins/kzevw
 class Service {
   private path: Path = {
     nodes: [],
@@ -22,13 +24,23 @@ class Service {
       }
     });
 
-    return this.getPath();
+    return await this.getPath();
+  }
+
+  async getNodes() {
+    const path = await this.getPath();
+
+    return path.nodes;
+  }
+
+  async getNodeById(id: string) {
+    return (await this.getNodes()).find(node => node.id === id);
   }
 
   async appendNode(node: Node) {
     const path = { ...this.path, nodes: [...this.path.nodes, node] };
 
-    return this.setPath(path);
+    return await this.setPath(path);
   }
 
   async updateNode(node: Node) {
@@ -38,7 +50,7 @@ class Service {
 
     const path = { ...this.path, nodes: [...nodes, node] };
 
-    return this.setPath(path);
+    return await this.setPath(path);
   }
 
   async deleteNode(node: Node) {
@@ -48,13 +60,30 @@ class Service {
 
     const path = { ...this.path, nodes };
 
-    return this.setPath(path);
+    return await this.setPath(path);
+  }
+
+  async deleteEdge(edge: Edge) {
+    const edges = (await this.getEdges()).filter(
+      currentEdge =>
+        currentEdge.to !== edge.to || currentEdge.from !== edge.from
+    );
+
+    const path = { ...this.path, edges };
+
+    return await this.setPath(path);
   }
 
   async clearNodes() {
-    const path = { ...this.path, nodes: [] };
+    const path = { edges: [], nodes: [] };
 
-    return this.setPath(path);
+    return await this.setPath(path);
+  }
+
+  async clearEdges() {
+    const path = { ...this.path, edges: [] };
+
+    return await this.setPath(path);
   }
 
   async swapNodes(oldNode: Node, node: Node) {
@@ -67,17 +96,19 @@ class Service {
     );
 
     this.path = { ...this.path!, nodes: [...filteredNodes, old, newNode] };
-    return this.setPath(this.path);
+    return await this.setPath(this.path);
   }
 
-  async getNodes() {
-    await this.getPath();
+  async getEdges() {
+    const path = await this.getPath();
 
-    return this.path!.nodes;
+    return path.edges;
   }
 
-  async getNodeById(id: string) {
-    return (await this.getNodes()).find(node => node.id === id);
+  async appendEdge(edge: Edge) {
+    const path = { ...this.path, edges: [...this.path.edges, edge] };
+
+    return await this.setPath(path);
   }
 }
 

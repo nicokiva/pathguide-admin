@@ -81,11 +81,13 @@ export const PGArticle: React.FC<PGArticleProps> = (props: PGArticleProps) => (
       <TitleBar>
         <Title>{props.title}</Title>
         <ButtonSection>
-          <PGButtonDelete
-            onClick={() =>
-              props.onDelete ? props.onDelete(props.item) : undefined
-            }
-          />
+          {props.onDelete && (
+            <PGButtonDelete
+              onClick={() =>
+                props.onDelete ? props.onDelete(props.item) : undefined
+              }
+            />
+          )}
         </ButtonSection>
       </TitleBar>
       <Content>{props.children}</Content>

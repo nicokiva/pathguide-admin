@@ -9,13 +9,14 @@ import { ROUTES, getRoute } from "../../metadata/Routes";
 import { Node } from "../../../models/Node";
 import { PGButtonAdd } from "../../shared/icons/PGButtonAdd";
 import { PGButtonBar } from "../../shared/PGButtonBar";
-import { Action } from "../../metadata/Actions";
 import { PGButtonClearAll } from "../../shared/icons/PGButtonClearAll";
+import { Edge } from "../../../models/Edge";
 
 type Props = {
+  edges: Array<Edge>;
   nodes: Array<Node>;
   onClearAll: () => void;
-  onDelete: (item: Node) => void;
+  onDelete: (item: Edge) => void;
 };
 
 const NodesWrapper = styled.div`
@@ -26,20 +27,7 @@ const NodesWrapper = styled.div`
 class Component extends React.PureComponent<Props> {
   @autobind
   handleAdd() {
-    history.push(
-      getRoute(ROUTES.NODE_ADD_EDIT)
-        .replace(":action", Action.ADD)
-        .replace(":id", "")
-    );
-  }
-
-  @autobind
-  handleEdit(node: Node) {
-    history.push(
-      getRoute(ROUTES.NODE_ADD_EDIT)
-        .replace(":action", Action.EDIT)
-        .replace(":id", node.id)
-    );
+    history.push(getRoute(ROUTES.EDGE_ADD));
   }
 
   render() {
@@ -50,21 +38,25 @@ class Component extends React.PureComponent<Props> {
           <PGButtonClearAll onClick={this.props.onClearAll} />
         </PGButtonBar>
 
-        {this.props.nodes.length > 0 ? (
+        {this.props.edges.length > 0 && this.props.nodes.length > 0 ? (
           <NodesWrapper>
-            {this.props.nodes.map(n => (
-              <Article
-                item={n}
-                onDelete={this.props.onDelete as any}
-                onClick={this.handleEdit as any}
-                key={n.id}
-                selectable
-                id={n.id}
-                title={n.description}
-              >
-                <Bullet question="Tag" answer={n.tag} />
-              </Article>
-            ))}
+            {this.props.edges.map(e => {
+              const key = `${e.from}-${e.to}`;
+              const from = this.props.nodes.find(node => node.tag === e.from)!;
+              const to = this.props.nodes.find(node => node.tag === e.to)!;
+              const title = `${from.description} ---> ${to.description}`;
+              return (
+                <Article
+                  item={e}
+                  onDelete={this.props.onDelete as any}
+                  key={key}
+                  id={key}
+                  title={title}
+                >
+                  <Bullet question="Instrucciones" answer={e.instructions} />
+                </Article>
+              );
+            })}
           </NodesWrapper>
         ) : (
           "No hay data"
@@ -74,4 +66,4 @@ class Component extends React.PureComponent<Props> {
   }
 }
 
-export const Nodes = withLoading(Component);
+export const Edges = withLoading(Component);
