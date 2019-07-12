@@ -44,8 +44,10 @@ export class Container extends React.PureComponent<
 
   @autobind
   async handleSave(beacon: Beacon) {
-    const node = this.state.nodes.find(node => node.id === beacon.identifier);
-    const oldNode = this.state.nodes.find(node => node.tag === beacon.node.tag);
+    const oldNode =
+      this.state.nodes.find(node => node.id === beacon.identifier) ||
+      ({ id: beacon.identifier } as Node);
+    const node = this.state.nodes.find(node => node.tag === beacon.node.tag);
 
     if (node === oldNode) {
       return;

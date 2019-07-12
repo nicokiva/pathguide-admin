@@ -41,9 +41,11 @@ export class Container extends React.PureComponent<
   @autobind
   handleChange(event: { target: { value: string; name: string } }) {
     const { value, name } = event.target;
+
+    const parsedValue = name === "floor" ? Number(value) : value;
     this.setState((prevState: ContainerState) => ({
       ...prevState,
-      selectedNode: { ...prevState.selectedNode, [name]: value }
+      selectedNode: { ...prevState.selectedNode, [name]: parsedValue }
     }));
   }
 

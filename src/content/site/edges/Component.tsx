@@ -54,6 +54,7 @@ class Component extends React.PureComponent<Props> {
                   title={title}
                 >
                   <Bullet question="Instrucciones" answer={e.instructions} />
+                  <Bullet question="Distancia (mts)" answer={e.distance} />
                 </Article>
               );
             })}

@@ -36,9 +36,10 @@ export class Container extends React.PureComponent<
   handleChange(event: { target: { value: string; name: string } }) {
     const { value, name } = event.target;
 
+    const parsedValue = name === "distance" ? Number(value) : value;
     this.setState((prevState: ContainerState) => ({
       ...prevState,
-      edge: { ...prevState.edge, [name]: value }
+      edge: { ...prevState.edge, [name]: parsedValue }
     }));
   }
 

@@ -95,7 +95,14 @@ class Service {
       node => !ignoredNodes.includes(node.id)
     );
 
-    this.path = { ...this.path!, nodes: [...filteredNodes, old, newNode] };
+    this.path = {
+      ...this.path!,
+      nodes: [...filteredNodes, newNode]
+    };
+    if (old.description) {
+      this.path = { ...this.path, nodes: [...this.path.nodes, old] };
+    }
+
     return await this.setPath(this.path);
   }
 

@@ -18,19 +18,19 @@ export const Component: React.FC<Props> = props => (
   <ConfirmationForm onSave={props.onSave} onCancel={props.onCancel}>
     <TextField
       fullWidth
-      label="Tag"
+      label="Descripción"
       margin="normal"
-      name="tag"
-      value={props.node && props.node.tag}
+      name="description"
+      value={props.node && props.node.description}
       onChange={props.onChange}
     />
 
     <TextField
       fullWidth
-      label="Descripción"
+      label="Tag"
       margin="normal"
-      name="description"
-      value={props.node && props.node.description}
+      name="tag"
+      value={props.node && props.node.tag}
       onChange={props.onChange}
     />
 
