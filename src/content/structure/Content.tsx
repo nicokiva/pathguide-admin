@@ -12,7 +12,7 @@ import { Container as EdgeAddContainer } from "../site/edgeAdd/Container";
 
 const ContentWrapper = styled.div`
   overflow: auto;
-  height: calc(100vh - 128px);
+  height: calc(100vh - 168px);
   margin-top: 64px;
   padding: 20px;
 `;
