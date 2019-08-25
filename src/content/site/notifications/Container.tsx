@@ -13,7 +13,7 @@ type ContainerState = {
 export class Container extends React.PureComponent<
   ContainerProps,
   ContainerState
-> {
+  > {
   state: ContainerState = {
     saved: true
   };
@@ -30,10 +30,9 @@ export class Container extends React.PureComponent<
   render() {
     let notificationsQuantity = 0;
 
-    if (this.state.path) {
-      if (this.state.path.nodes.length === 0) {
-        notificationsQuantity++;
-      }
+
+    if (this.state.path === undefined || this.state.path.nodes === undefined || this.state.path.nodes.length === 0) {
+      notificationsQuantity++;
     }
 
     return <Component notificationsQuantity={notificationsQuantity} />;
