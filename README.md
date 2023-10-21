@@ -1,3 +1,7 @@
+As part of the final project of the master, this project was created to act as a very small admin to update the map in pathguide app.
+This admin stores the raw JSON map in memory which is then fetched by the app.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
